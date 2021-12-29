@@ -11,36 +11,28 @@ import { UserService } from '../user.service';
 export class CreateUserComponent implements OnInit {
 
   user: User = new User();
-  submitted = false;
 
   constructor(private userService: UserService,
     private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void{
   }
 
-  newUser(): void {
-    this.submitted = false;
-    this.user = new User();
+  saveUser(){
+    this.userService.createUser(this.user).subscribe( data =>{
+      console.log(data);
+      this.goToUserList();
+    },
+    error => console.log(error));
   }
 
-  save() {
-    this.userService
-      .createUser(this.user).subscribe(data => {
-        console.log(data)
-        this.user = new User();
-        this.gotoList();
-      },
-        error => console.log(error));
-  }
-
-  onSubmit() {
-    this.submitted = true;
-    this.save();
-  }
-
-  gotoList() {
+  goToUserList(){
     this.router.navigate(['/users']);
+  }
+  
+  onSubmit(){
+    console.log(this.user);
+    this.saveUser();
   }
 
 }

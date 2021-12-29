@@ -10,32 +10,32 @@ import { UserService } from '../user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  users!: Observable<User[]>;
-  constructor(private userService: UserService, private router: Router) { }
+  users: User[] = [];
+  constructor(private userService: UserService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.reloadData();
+    this.getUsers();
   }
 
-  reloadData() {
-    this.users = this.userService.getUsersList();
+  private getUsers(){
+    this.userService.getUsersList().subscribe(data => {
+      this.users = data;
+    });
   }
 
-  deleteUser(userName: string) {
-    this.userService.deleteUser(userName)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        },
-        error => console.log(error));
-  }
-
-  userDetails(userName: string) {
-    this.router.navigate(['details', userName]);
+  userDetails(userName: string){
+    this.router.navigate(['user-details', userName]);
   }
 
   updateUser(userName: string){
     this.router.navigate(['update-user', userName]);
+  }
+
+  deleteUser(userName: string){
+    this.userService.deleteUser(userName).subscribe( data => {
+      console.log(data);
+      this.getUsers();
+    })
   }
 }

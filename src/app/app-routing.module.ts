@@ -6,11 +6,11 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'employee', pathMatch: 'full' },
-  { path: 'employees', component: UserListComponent },
-  { path: 'add', component: CreateUserComponent },
-  { path: 'update/:id', component: UpdateUserComponent },
-  { path: 'details/:id', component: UserDetailsComponent },
+  {path: 'users', component: UserListComponent},
+  {path: 'create-user', component: CreateUserComponent},
+  {path: '', redirectTo: 'users', pathMatch: 'full'},
+  {path: 'update-user/:userName', component: UpdateUserComponent},
+  {path: 'user-details/:userName', component: UserDetailsComponent}
 ];
 
 @NgModule({

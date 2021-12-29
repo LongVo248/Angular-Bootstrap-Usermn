@@ -10,38 +10,28 @@ import { UserService } from '../user.service';
 })
 export class UpdateUserComponent implements OnInit {
 
-  userName: string='';
-  user: User = new User;
+  userName!: string;
+  user: User = new User();
+  constructor(private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
-  constructor(private route: ActivatedRoute, private router: Router,
-    private userService: UserService) { }
-
-  ngOnInit() {
-    this.user = new User();
-
+  ngOnInit(): void {
     this.userName = this.route.snapshot.params['userName'];
 
-    this.userService.getUser(this.userName)
-      .subscribe(data => {
-        console.log(data)
-        this.user = data;
-      }, error => console.log(error));
+    this.userService.getUserByUsername(this.userName).subscribe(data => {
+      this.user = data;
+    }, error => console.log(error));
   }
 
-  updateUser() {
-    this.userService.updateUser(this.userName, this.user)
-      .subscribe(data => {
-        console.log(data);
-        this.user = new User();
-        this.gotoList();
-      }, error => console.log(error));
+  onSubmit(){
+    this.userService.updateUser(this.userName, this.user).subscribe( data =>{
+      this.goToUserList();
+    }
+    , error => console.log(error));
   }
 
-  onSubmit() {
-    this.updateUser();
-  }
-
-  gotoList() {
+  goToUserList(){
     this.router.navigate(['/users']);
   }
 
