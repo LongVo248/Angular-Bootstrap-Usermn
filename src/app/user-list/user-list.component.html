@@ -1,6 +1,45 @@
-<div class="panel panel-primary">
+<div class="container">
     <div class="panel-heading">
         <h2>User List</h2>
+    </div>
+    <!-- [formGroup]="searchUser" (ngSubmit)="searchUser()" -->
+    <div class="container-fluid" >
+        <form [formGroup]="searchUser" (ngSubmit)="search()">
+            <div class=" search row d-flex justify-content-md-end mb-4 text-right float-right">
+                <div class="col-xl-2 col-md-3 form-group" style="text-align: center">
+                    <label for="username">Username</label>
+                    <input id="username" class="form-control" type="text" formControlName="username">
+                </div>
+                <div class="col-xl-2 col-md-3 form-group" style="text-align: right">
+                    <div style="text-align: center">
+                        <label for="firstname">Firstname</label>
+                    </div>
+                    <div>
+                        <input type="text" id="firstname" class="form-control" formControlName="firstname">
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-3 form-group" style="text-align: right">
+                    <div style="text-align: center">
+                        <label for="lastname">Lastname</label>
+                    </div>
+                    <div>
+                        <input type="text" id="lastname" class="form-control" formControlName="lastname">
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-3 form-group" style="text-align: right">
+                    <div style="text-align: center">
+                        <label for="email">Email</label>
+                    </div>
+                    <div>
+                        <input type="text" id="email" class="form-control" formControlName="email">
+                    </div>
+                </div>
+                <div class="col-xl-2 col-4" style="text-align: right">
+                    <br>
+                    <button class="btn btn-success mt-xl-2"><i class="fa fa-search"></i>Search</button>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="panel-body">
         <table class="table table-striped">
@@ -16,27 +55,49 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of users ">
-                    <td>{{user.userName}}</td>
-                    <td>{{user.pwd}}</td>
-                    <td>{{user.firstname}}</td>
-                    <td>{{user.lastname}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.role}}</td>
+                <tr *ngFor="let users of user ">
+                    <td>{{users.userName}}</td>
+                    <td>{{users.pwd}}</td>
+                    <td>{{users.firstname}}</td>
+                    <td>{{users.lastname}}</td>
+                    <td>{{users.email}}</td>
+                    <td>{{users.role}}</td>
                     <td>
-                        <button (click)="updateUser(user.userName)" class="btn btn-primary">Update</button>
-                        <button (click)="deleteUser(user.userName)" class="btn btn-danger" style="margin-left: 10px">Delete</button>
-                        <button (click)="userDetails(user.userName)" class="btn btn-info" style="margin-left: 10px">Details</button>
+                        <button (click)="updateUser(users.userName)" class="btn btn-primary">Update</button>
+                        <button (click)="deleteUser(users.userName)" class="btn btn-danger"
+                            style="margin-left: 10px">Delete</button>
+                        <button (click)="userDetails(users.userName)" class="btn btn-info"
+                            style="margin-left: 10px">Details</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div style="text-align: right;">
-        <tr>
-            <button  type="button" class="btn btn-dark" >Next Page</button>
-    </tr>
-    </div>
-    
-    
+    <!--    phân trang-->
+    <div class="mt-3">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination d-flex justify-content-md-end justify-content-center">
+            <li class="page-item"><a class="page-link" (click)="firtPage()">First page</a></li>
+            <li class="page-item"><a class="page-link" (click)="prviousPage()">Previous page</a></li>
+            <!--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+            <li class="page-item col-md-1 col-2  px-0">
+              <!--                        <input class="form-control shadow-none rounded-0" type="text" placeholder="2/5">-->
+              <div class="input-group">
+                <input type="number" min="1" [max]="totalPagination + 2" class="form-control text-right rounded-0"
+                       placeholder="2" aria-label="Username"
+                       aria-describedby="basic-addon1" value="{{indexPagination}}" [value]="indexPagination"
+                       (change)="indexPaginationChage(getValue($event))">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">{{totalPagination}}</span>
+                </div>
+              </div>
+            </li>
+            <li class="page-item">
+              <button class="btn btn-primary rounded-0" (click)="findPaginnation()">Go</button>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="nextPage()">Next page</a></li>
+            <li class="page-item"><a class="page-link" (click)="lastPage()">Last page</a></li>
+          </ul>
+        </nav>
+      </div>
 </div>
