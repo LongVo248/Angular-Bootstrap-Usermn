@@ -9,8 +9,8 @@ const routes: Routes = [
   {path: 'users', component: UserListComponent},
   {path: 'create-user', component: CreateUserComponent},
   {path: '', redirectTo: 'users', pathMatch: 'full'},
-  {path: 'update-user/:userName', component: UpdateUserComponent},
-  {path: 'user-details/:userName', component: UserDetailsComponent}
+  {path: 'update-user/:username', component: UpdateUserComponent},
+  {path: 'user-details/:username', component: UserDetailsComponent}
 ];
 
 @NgModule({

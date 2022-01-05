@@ -45,8 +45,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Username</th>
-                    <th>Password</th>
+                    <th>Username</th>                
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Email</th>
@@ -56,17 +55,16 @@
             </thead>
             <tbody>
                 <tr *ngFor="let users of user ">
-                    <td>{{users.userName}}</td>
-                    <td>{{users.pwd}}</td>
+                    <td>{{users.username}}</td>
                     <td>{{users.firstname}}</td>
                     <td>{{users.lastname}}</td>
                     <td>{{users.email}}</td>
                     <td>{{users.role}}</td>
                     <td>
-                        <button (click)="updateUser(users.userName)" class="btn btn-primary">Update</button>
-                        <button (click)="deleteUser(users.userName)" class="btn btn-danger"
+                        <button (click)="updateUser(users.username)" class="btn btn-primary">Update</button>
+                        <button (click)="deleteUser(users.username)" class="btn btn-danger"
                             style="margin-left: 10px">Delete</button>
-                        <button (click)="userDetails(users.userName)" class="btn btn-info"
+                        <button (click)="userDetails(users.username)" class="btn btn-info"
                             style="margin-left: 10px">Details</button>
                     </td>
                 </tr>

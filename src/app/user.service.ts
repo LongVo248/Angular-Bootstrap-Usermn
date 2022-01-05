@@ -29,16 +29,16 @@ export class UserService {
     return this.httpClient.post(`${this.baseURL}`, user);
   }
 
-  getUserByUsername(userName: string): Observable<User> {
-    return this.httpClient.get<User>(`${this.baseURL}/${userName}`);
+  getUserByUsername(username: string): Observable<User> {
+    return this.httpClient.get<User>(`${this.baseURL}/${username}`);
   }
 
-  updateUser(userName: string, user: User): Observable<Object> {
-    return this.httpClient.put(`${this.baseURL}/${userName}`, user);
+  updateUser(username: string, user: User): Observable<Object> {
+    return this.httpClient.put(`${this.baseURL}/${username}`, user);
   }
 
-  deleteUser(userName: string): Observable<Object> {
-    return this.httpClient.delete(`${this.baseURL}/${userName}`);
+  deleteUser(username: string): Observable<Object> {
+    return this.httpClient.delete(`${this.baseURL}/${username}`);
   }
 
   searchUser(userName: string, firstname: string, lastname: string, email: string): Observable<any> {

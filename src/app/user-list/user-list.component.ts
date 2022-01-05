@@ -118,18 +118,21 @@ export class UserListComponent implements OnInit {
   }
 
   prviousPage() {
-    this.indexPagination = this.indexPagination - 1;
-    console.log("indexPagination ", this.indexPagination);
-    console.log("totalPagination ", this.totalPagination);
-    if (this.indexPagination == 0) {
-      this.indexPagination = 1;
-      this.ngOnInit();
-    } else {
-      this.userService.getUserList(this.indexPagination - 1).subscribe((data: any) => {
-        console.log(this.indexPagination);
-        this.user = data.content;
-      })
+    if(this.indexPagination>0){
+      this.indexPagination = this.indexPagination - 1;
+      console.log("indexPagination ", this.indexPagination);
+      console.log("totalPagination ", this.totalPagination);
+      if (this.indexPagination == 0) {
+        this.indexPagination = 1;
+        this.ngOnInit();
+      } else {
+        this.userService.getUserList(this.indexPagination - 1).subscribe((data: any) => {
+          console.log(this.indexPagination);
+          this.user = data.content;
+        })
+      }
     }
+    
   }
 
   lastPage() {

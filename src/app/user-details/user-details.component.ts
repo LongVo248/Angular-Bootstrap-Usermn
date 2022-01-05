@@ -10,15 +10,15 @@ import { UserService } from '../user.service';
 })
 export class UserDetailsComponent implements OnInit {
 
-  userName!: string;
+  username!: string;
   user: User = new User;
   constructor(private route: ActivatedRoute, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userName = this.route.snapshot.params['userName'];
+    this.username = this.route.snapshot.params['username'];
 
     this.user = new User();
-    this.userService.getUserByUsername(this.userName).subscribe( data => {
+    this.userService.getUserByUsername(this.username).subscribe( data => {
       this.user = data;
     });
   }
