@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from '../user';
-import { UserService } from '../user.service';
+import { User } from '../services/user';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -36,8 +36,8 @@ export class UserListComponent implements OnInit {
       if ((this.listUserNotPagination.length % 5) === 0) {
         this.totalPagination = this.listUserNotPagination.length / 5;
       }else if((this.listUserNotPagination.length % 5) != 0){
-        
-        this.totalPagination = (this.listUserNotPagination.length -(this.listUserNotPagination.length%5))/5 + 1; 
+
+        this.totalPagination = (this.listUserNotPagination.length -(this.listUserNotPagination.length%5))/5 + 1;
       }
     })
     console.log("tong trang ", this.totalPagination);
@@ -68,7 +68,7 @@ export class UserListComponent implements OnInit {
   }
 
   search(){
-    
+
     if ((this.searchUser.value.username.length === 0) &&
       (this.searchUser.value.firstname.length === 0) &&
       (this.searchUser.value.lastname.length === 0) &&
@@ -132,7 +132,7 @@ export class UserListComponent implements OnInit {
         })
       }
     }
-    
+
   }
 
   lastPage() {

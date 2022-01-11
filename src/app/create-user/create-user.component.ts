@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../user';
-import { UserService } from '../user.service';
+import { User } from '../services/user';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-create-user',
@@ -29,7 +29,7 @@ export class CreateUserComponent implements OnInit {
   goToUserList(){
     this.router.navigate(['/users']);
   }
-  
+
   onSubmit(){
     console.log(this.user);
     this.saveUser();

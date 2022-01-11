@@ -8,10 +8,11 @@ import { User } from './user';
 })
 export class UserService {
 
-  private baseURL = 'http://localhost:3471/api/v1/users';
+  private baseURL = 'http://localhost:9595';
 
   private httpOptions = {
     headers: new HttpHeaders({
+
       'Content-Type': 'appication/json'
     })
   };
@@ -47,5 +48,9 @@ export class UserService {
 
   getAllUserNotPagination(): Observable<any> {
     return this.httpClient.get<any>(this.baseURL)
+  }
+
+  getUser(){
+    return this.httpClient.get(this.baseURL+"/getusers")
   }
 }
